@@ -4,9 +4,12 @@ import edu.cnm.deepdive.craps.model.Game;
 import edu.cnm.deepdive.craps.model.State;
 import java.util.Random;
 import java.util.Scanner;
+import org.apache.commons.rng.simple.JDKRandomBridge;
+import org.apache.commons.rng.simple.RandomSource;
 
 public class Craps {
 
+  private static final int SEED_SIZE = 312;
   private Random rng;
   private Game game;
 
@@ -28,7 +31,7 @@ public class Craps {
   }
 
   public Craps() {
-    rng = new Random();
+    rng = new JDKRandomBridge(RandomSource.MT_64, RandomSource.createIntArray(SEED_SIZE));
     game = new Game(rng);
   }
   public void play(boolean verbose) {
